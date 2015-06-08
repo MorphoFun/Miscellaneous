@@ -1,0 +1,12 @@
+###  Reading in a data file directly from GitHub ###
+# read.csv() and similar functions do not read https:// webaddresses,
+# so here is a work-around to allow you to read data from GitHub
+# using base functions.  
+
+readGitHub <- function(url) {
+	store <- tempfile()
+	download.file(url, destfile=store, method="curl")
+	dd <- read.csv(store)
+	return(dd)
+}
+
