@@ -12,7 +12,7 @@ readGitHub <- function(url, type=c("csv", "txt")) {
 		dd <- read.csv(store)
 	}
 	if (type=="txt") {
-		dd <- read.table(store, sep=",")
+		dd <- read.delim(store, sep="\t")
 	}
 	return(dd)
 }
