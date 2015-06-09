@@ -2,11 +2,18 @@
 # read.csv() and similar functions do not read https:// webaddresses,
 # so here is a work-around to allow you to read data from GitHub
 # using base functions.  
+# type = "csv" assumes comma-separated values.
+# type = "txt" assumes a tab delimited text file.
 
-readGitHub <- function(url) {
+readGitHub <- function(url, type=c("csv", "txt")) {
 	store <- tempfile()
 	download.file(url, destfile=store, method="curl")
-	dd <- read.csv(store)
+	if (type=="csv") {
+		dd <- read.csv(store)
+	}
+	if (type=="txt") {
+		dd <- read.table(store, sep=",")
+	}
 	return(dd)
 }
 
